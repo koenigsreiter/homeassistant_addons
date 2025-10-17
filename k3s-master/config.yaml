@@ -25,12 +25,6 @@ privileged:
 map:
   - homeassistant_config:rw
   - share:rw
-  - type: data
-    path: /run
-    read_only: false
-  - type: data
-    path: /var/lib
-    read_only: false
 full_access: true
 options:
   cluster_token: null
