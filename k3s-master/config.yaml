@@ -1,5 +1,5 @@
 name: "K3s Master"
-version: "1.7.0"
+version: "1.8.0"
 init: false
 slug: "k3s_master"
 description: "Runs a K3s control-plane server on Home Assistant OS with persistent data"
@@ -26,11 +26,13 @@ map:
   - homeassistant_config:rw
   - share:rw
 options:
-  cluster_token: "mysecret"
+  cluster_token: null
   data_path: "/data/k3s"
   extra_args: ""
+  k3s_snapshotter: "fuse-overlayfs"
 schema:
   cluster_token: str
   data_path: str
   extra_args: str
+  k3s_snapshotter: str
 image: ghcr.io/koenigsreiter/homeassistant-addon-k3s-master-{arch}

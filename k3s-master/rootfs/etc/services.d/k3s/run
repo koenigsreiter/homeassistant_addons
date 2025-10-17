@@ -4,6 +4,7 @@ set -e
 CLUSTER_TOKEN=$(bashio::config 'cluster_token')
 DATA_PATH=$(bashio::config 'data_path')
 EXTRA_ARGS=$(bashio::config 'extra_args')
+SNAPSHOTTER=$(bashio::config 'k3s_snapshotter')
 
 mkdir -p "$DATA_PATH"
 
@@ -11,6 +12,7 @@ bashio::log.info "Starting K3s server..."
 exec /usr/local/bin/k3s server \
   --token "$CLUSTER_TOKEN" \
   --data-dir "$DATA_PATH" \
+  --snapshotter="$SNAPSHOTTER" \
   --cluster-init \
   --embedded-registry \
   --disable traefik \
