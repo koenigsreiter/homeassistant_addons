@@ -1,5 +1,5 @@
 name: "K3s Master"
-version: "1.9.0"
+version: "1.10.0"
 init: false
 slug: "k3s_master"
 description: "Runs a K3s control-plane server on Home Assistant OS with persistent data"
@@ -27,11 +27,12 @@ map:
   - share:rw
 devices:
   - /dev/kmsg
+full_access: true
 options:
   cluster_token: null
   data_path: "/data/k3s"
   extra_args: ""
-  k3s_snapshotter: "fuse-overlayfs"
+  k3s_snapshotter: "native"
 schema:
   cluster_token: str
   data_path: str
