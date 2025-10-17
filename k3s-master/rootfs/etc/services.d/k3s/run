@@ -1,8 +1,6 @@
 #!/usr/bin/with-contenv bashio
 set -e
 
-CONFIG_PATH=/data/options.json
-
 CLUSTER_TOKEN=$(bashio::config 'cluster_token')
 DATA_PATH=$(bashio::config 'data_path')
 EXTRA_ARGS=$(bashio::config 'extra_args')
@@ -21,8 +19,11 @@ exec /usr/local/bin/k3s server \
   --token "$CLUSTER_TOKEN" \
   --data-dir "$DATA_PATH" \
   --disable-agent \
+  --cluster-init \
+  --embedded-registry \
   --disable traefik \
   --disable servicelb \
+  --disable local-storage \
   --write-kubeconfig "$DATA_PATH/k3s.yaml" \
   --write-kubeconfig-mode 644 \
   --tls-san "$(hostname -I | awk '{print $1}')" \
