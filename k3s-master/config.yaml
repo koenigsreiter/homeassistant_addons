@@ -7,14 +7,23 @@ arch:
   - aarch64
   - amd64
 startup: services
-boot: auto
 host_network: true
 privileged:
-  - NET_ADMIN
-  - SYS_ADMIN
-  - CAP_SYS_MODULE
+  - "BPF"
+  - "DAC_READ_SEARCH"
+  - "IPC_LOCK"
+  - "NET_ADMIN"
+  - "NET_RAW"
+  - "PERFMON"
+  - "SYS_ADMIN"
+  - "SYS_MODULE"
+  - "SYS_NICE"
+  - "SYS_PTRACE"
+  - "SYS_RAWIO"
+  - "SYS_RESOURCE"
+  - "SYS_TIME"
 map:
-  - config:rw
+  - homeassistant_config:rw
   - share:rw
 options:
   cluster_token: "mysecret"
