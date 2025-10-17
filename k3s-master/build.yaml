@@ -12,4 +12,3 @@ labels:
   org.opencontainers.image.licenses: "Apache License 2.0"
 args:
   TEMPIO_VERSION: "2021.09.0"
-image: ghcr.io/koenigsreiter/homeassistant_addons/k3s-master
