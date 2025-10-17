@@ -3,7 +3,6 @@ version: "1.2.0"
 slug: "k3s_master"
 description: "Runs a K3s control-plane server on Home Assistant OS with persistent data"
 url: "https://github.com/koenigsreiter/homeassistant-addons/tree/main/k3s-master"
-image: ghcr.io/koenigsreiter/homeassistant_addons/{arch}-addon-k3s-master
 arch:
   - aarch64
   - amd64
@@ -34,3 +33,4 @@ schema:
   cluster_token: str
   data_path: str
   extra_args: str
+image: "ghcr.io/koenigsreiter/home-assistant/{arch}-addon-k3s-master"
