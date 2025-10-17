@@ -1,0 +1,35 @@
+name: "K3s Master"
+version: "1.2.0"
+slug: "k3s_master"
+description: "Runs a K3s control-plane server on Home Assistant OS with persistent data"
+url: "https://github.com/koenigsreiter/homeassistant-addons/tree/main/k3s-master"
+arch:
+  - amd64
+startup: services
+host_network: true
+privileged:
+  - "BPF"
+  - "DAC_READ_SEARCH"
+  - "IPC_LOCK"
+  - "NET_ADMIN"
+  - "NET_RAW"
+  - "PERFMON"
+  - "SYS_ADMIN"
+  - "SYS_MODULE"
+  - "SYS_NICE"
+  - "SYS_PTRACE"
+  - "SYS_RAWIO"
+  - "SYS_RESOURCE"
+  - "SYS_TIME"
+map:
+  - homeassistant_config:rw
+  - share:rw
+options:
+  cluster_token: "mysecret"
+  data_path: "/data/k3s"
+  extra_args: ""
+schema:
+  cluster_token: str
+  data_path: str
+  extra_args: str
+image: "ghcr.io/koenigsreiter/home-assistant/{arch}-addon-k3s-master"
