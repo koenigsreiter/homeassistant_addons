@@ -8,3 +8,4 @@ labels:
   org.opencontainers.image.licenses: "Apache License 2.0"
 args:
   TEMPIO_VERSION: "2021.09.0"
+  K3S_VERSION: "v1.34.1%2Bk3s1"

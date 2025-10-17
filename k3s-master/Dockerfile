@@ -3,19 +3,13 @@ ARG BUILD_FROM
 FROM $BUILD_FROM
 
 # Execute during the build of the image
-ARG TEMPIO_VERSION BUILD_ARCH
-RUN \
+ARG TEMPIO_VERSION BUILD_ARCH K3S_VERSION
+RUN apk add --no-cache curl bash jq iptables && \
     curl -sSLf -o /usr/bin/tempio \
-    "https://github.com/home-assistant/tempio/releases/download/${TEMPIO_VERSION}/tempio_${BUILD_ARCH}"
-
-
-# Install dependencies and K3s
-RUN apk add --no-cache curl bash jq iptables \
- && curl -sfL https://get.k3s.io -o /install-k3s.sh \
- && chmod +x /install-k3s.sh
+    "https://github.com/home-assistant/tempio/releases/download/${TEMPIO_VERSION}/tempio_${BUILD_ARCH}" && \
+    curl -sSLf https://github.com/k3s-io/k3s/releases/${K3S_VERSION}/download/k3s -o /usr/local/bin/k3s
 
 # Copy root filesystem
 COPY rootfs /
 
-COPY run_install.sh /run_install.sh
-RUN chmod +x /run_install.sh /etc/services.d/k3s/run /etc/services.d/k3s/finish
+RUN chmod +x /etc/services.d/k3s/run /etc/services.d/k3s/finish

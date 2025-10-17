@@ -7,18 +7,10 @@ EXTRA_ARGS=$(bashio::config 'extra_args')
 
 mkdir -p "$DATA_PATH"
 
-bashio::log.info "Installing K3s (server only)..."
-export INSTALL_K3S_SKIP_ENABLE=true
-export INSTALL_K3S_SKIP_START=true
-export INSTALL_K3S_EXEC="server --disable-agent --disable traefik --disable servicelb --node-taint CriticalAddonsOnly=true:NoExecute --data-dir $DATA_PATH $EXTRA_ARGS"
-
-/run_install.sh
-
 bashio::log.info "Starting K3s server..."
 exec /usr/local/bin/k3s server \
   --token "$CLUSTER_TOKEN" \
   --data-dir "$DATA_PATH" \
-  --disable-agent \
   --cluster-init \
   --embedded-registry \
   --disable traefik \
