@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.9.0
+
+- Added /dev/kmsg device into container
+
 ## 1.8.0
 
 - Require k3s-token
