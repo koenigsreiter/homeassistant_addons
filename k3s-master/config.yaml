@@ -1,20 +1,26 @@
-# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
-name: K3s Master
-version: "0.1.0"
-slug: k3s-master
-description: Allows to run a k3s master as an Home Assistant addon
-url: "https://github.com/koenigsreiter/homeassistant_addons/tree/main/k3s-master"
+name: "K3s Master"
+version: "1.2.0"
+slug: "k3s_master"
+description: "Runs a K3s control-plane server on Home Assistant OS with persistent data"
+url: "https://github.com/koenigsreiter/homeassistant-addons/tree/main/k3s-master"
 arch:
-  - armhf
-  - armv7
   - aarch64
   - amd64
-  - i386
-init: false
+startup: services
+boot: auto
+host_network: true
+privileged:
+  - NET_ADMIN
+  - SYS_ADMIN
+  - CAP_SYS_MODULE
 map:
+  - config:rw
   - share:rw
 options:
-  message: "Hello world..."
+  cluster_token: "mysecret"
+  data_path: "/data/k3s"
+  extra_args: ""
 schema:
-  message: "str?"
-image: "ghcr.io/koenigsreiter/homeassistant_addons/{arch}-addon-k3s-master"
+  cluster_token: str
+  data_path: str
+  extra_args: str

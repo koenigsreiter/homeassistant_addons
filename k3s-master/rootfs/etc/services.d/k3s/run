@@ -1,0 +1,29 @@
+#!/usr/bin/with-contenv bashio
+set -e
+
+CONFIG_PATH=/data/options.json
+
+CLUSTER_TOKEN=$(bashio::config 'cluster_token')
+DATA_PATH=$(bashio::config 'data_path')
+EXTRA_ARGS=$(bashio::config 'extra_args')
+
+mkdir -p "$DATA_PATH"
+
+bashio::log.info "Installing K3s (server only)..."
+export INSTALL_K3S_SKIP_ENABLE=true
+export INSTALL_K3S_SKIP_START=true
+export INSTALL_K3S_EXEC="server --disable-agent --disable traefik --disable servicelb --node-taint CriticalAddonsOnly=true:NoExecute --data-dir $DATA_PATH $EXTRA_ARGS"
+
+/run_install.sh
+
+bashio::log.info "Starting K3s server..."
+exec /usr/local/bin/k3s server \
+  --token "$CLUSTER_TOKEN" \
+  --data-dir "$DATA_PATH" \
+  --disable-agent \
+  --disable traefik \
+  --disable servicelb \
+  --write-kubeconfig "$DATA_PATH/k3s.yaml" \
+  --write-kubeconfig-mode 644 \
+  --tls-san "$(hostname -I | awk '{print $1}')" \
+  $EXTRA_ARGS

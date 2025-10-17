@@ -8,17 +8,14 @@ RUN \
     curl -sSLf -o /usr/bin/tempio \
     "https://github.com/home-assistant/tempio/releases/download/${TEMPIO_VERSION}/tempio_${BUILD_ARCH}"
 
-# Copy root filesystem
-COPY rootfs /
 
-ARG BUILD_FROM
-FROM ${BUILD_FROM}
-
+# Install dependencies and K3s
 RUN apk add --no-cache curl bash jq iptables \
  && curl -sfL https://get.k3s.io -o /install-k3s.sh \
  && chmod +x /install-k3s.sh
 
-COPY run.sh /run.sh
-RUN chmod +x /run.sh
+# Copy root filesystem
+COPY rootfs /
 
-CMD [ "/run.sh" ]
+COPY run_install.sh /run_install.sh
+RUN chmod +x /run_install.sh /etc/services.d/k3s/run /etc/services.d/k3s/finish
