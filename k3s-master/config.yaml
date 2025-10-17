@@ -1,5 +1,5 @@
 name: "K3s Master"
-version: "1.11.0"
+version: "1.12.0"
 init: false
 slug: "k3s_master"
 description: "Runs a K3s control-plane server on Home Assistant OS with persistent data"
@@ -25,12 +25,12 @@ privileged:
 map:
   - homeassistant_config:rw
   - share:rw
-  - type: tmpfs
-    target: /run
-  - type: tmpfs
-    target: /var/run
-  - type: tmpfs
-    target: /var/lib
+  - type: data
+    path: /run
+    read_only: false
+  - type: data
+    path: /var/lib
+    read_only: false
 full_access: true
 options:
   cluster_token: null
