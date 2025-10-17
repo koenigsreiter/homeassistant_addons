@@ -18,5 +18,4 @@ exec /usr/local/bin/k3s server \
   --disable local-storage \
   --write-kubeconfig "$DATA_PATH/k3s.yaml" \
   --write-kubeconfig-mode 644 \
-  --tls-san "$(hostname -I | awk '{print $1}')" \
   $EXTRA_ARGS

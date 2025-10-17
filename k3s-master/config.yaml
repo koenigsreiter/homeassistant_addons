@@ -1,5 +1,5 @@
 name: "K3s Master"
-version: "1.5.0"
+version: "1.6.0"
 init: false
 slug: "k3s_master"
 description: "Runs a K3s control-plane server on Home Assistant OS with persistent data"
