@@ -32,4 +32,4 @@ schema:
   cluster_token: str
   data_path: str
   extra_args: str
-image: ghcr.io/koenigsreiter/homeassistant-addons/{arch}-addon-k3s-master
+image: ghcr.io/koenigsreiter/homeassistant-addon-k3s-master-{arch}
