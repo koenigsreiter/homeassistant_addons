@@ -1,5 +1,6 @@
 name: "K3s Master"
-version: "1.3.0"
+version: "1.4.0"
+init: false
 slug: "k3s_master"
 description: "Runs a K3s control-plane server on Home Assistant OS with persistent data"
 url: "https://github.com/koenigsreiter/homeassistant-addons/tree/main/k3s-master"
